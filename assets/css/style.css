@@ -44,7 +44,7 @@ body{
     cursor: pointer;
 }
 .degree__section span{
-    margin: 1rem;
+    margin: 0.1rem;
     font-size: 1.6rem;
 }
 .degree__section h2{

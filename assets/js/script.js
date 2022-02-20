@@ -11,7 +11,7 @@ window.addEventListener('load', ()=>{
     
     if(navigator.geolocation){
 
-        navigator.geolocation.getCurrentPosition(position =>{
+        navigator.geolocation.getCurrentPosition(  position =>{
             long = position.coords.longitude;
             lat = position.coords.latitude;
             api = `${proxy}https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=5349b1599db6dd3cb3add5621bc5f939`;
@@ -26,46 +26,21 @@ window.addEventListener('load', ()=>{
         
 });
 
-function fetchApi(api){
+async function fetchApi(api){
 
-    fetch(api)
-            .then(res => { return res.json();})
-            .then(data => {
+    
+
+    const response = await fetch(api);
+    const data = await response.json();
             
                 const{description,id} = data.weather[0]
                 const{temp= data.main.temp, name=data.name} = data;
 
-                if(id == 800){
-                    wIcons.src =`https://openweathermap.org/img/wn/01d@2x.png`;
-                } 
-        
-                else if(id>=200 && id<=232){
-                    wIcons.src =`https://openweathermap.org/img/wn/11d@2x.png`;
-                }
-
-                else if(id>=300 && id<=321){
-                    wIcons.src =`https://openweathermap.org/img/wn/09d@2x.png`;
-                }
-
-                else if(id>=500 && id<=531){
-                    wIcons.src =`https://openweathermap.org/img/wn/10d@2x.png`;
-                }
-
-                else if(id>=600 && id<=622){
-                    wIcons.src =`https://openweathermap.org/img/wn/13d@2x.png`;
-                }
-
-                else if(id>=700 && id<=781){
-                    wIcons.src =`https://openweathermap.org/img/wn/50d@2x.png`;
-                }
-                
-                else if(id>=800 && id<=804){
-                    wIcons.src =`https://openweathermap.org/img/wn/03d@2x.png`;
-                }
-
                 temperatureDegree.textContent = temp;
                 temperatureDescription.textContent=`Its ${description} today`;
                 locationTimezone.textContent=`${name}, ${data.sys.country}`;
+                wIcons.src =`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+               
                 console.log(data);
 
                 //change temperature F/C
@@ -81,7 +56,6 @@ function fetchApi(api){
                     temperatureDegree.textContent = temp;
                 }
 
-            });
             });
         
 }

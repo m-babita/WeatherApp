@@ -39,9 +39,7 @@ async function fetchApi(api){
                 temperatureDegree.textContent = temp;
                 temperatureDescription.textContent=`Its ${description} today`;
                 locationTimezone.textContent=`${name}, ${data.sys.country}`;
-                wIcons.src =`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-               
-                console.log(data);
+                wIcons.src =`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
                 //change temperature F/C
             let fahren = (temp * 9 / 5) +32;

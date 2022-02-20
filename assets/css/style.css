@@ -24,6 +24,10 @@ body{
     align-items: center;
 }
 
+.location__timezone{
+    font-size: 2rem;
+}
+
 .temperature{
     flex-direction: column;
 }

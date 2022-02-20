@@ -1,10 +1,11 @@
 window.addEventListener('load', ()=>{
-    let long;
-    let lat;
-    let locationTimezone = document.querySelector(".location__timezone");
-    let temperatureDescription = document.querySelector(".temperature__description");
-    let temperatureDegree = document.querySelector(".temperature__degree");
-
+    let long, lat,
+    locationTimezone = document.querySelector(".location__timezone"),
+    temperatureDescription = document.querySelector(".temperature__description"),
+    temperatureDegree = document.querySelector(".temperature__degree"),
+    wIcons = document.querySelector(".icons");
+    
+    
     if(navigator.geolocation){
 
         navigator.geolocation.getCurrentPosition(position =>{
@@ -18,15 +19,50 @@ window.addEventListener('load', ()=>{
             })
             .then(data => {
                 
-                const{temp= data.main.temp, weather= data.weather[0].main} = data;
+                
+                const{description,id} = data.weather[0]
+                const{temp= data.main.temp, name=data.name} = data;
+
+                if(id == 800){
+                    wIcons.src =`http://openweathermap.org/img/wn/01d@2x.png`;
+                } 
+        
+                else if(id>=200 && id<=232){
+                    wIcons.src =`http://openweathermap.org/img/wn/11d@2x.png`;
+                }
+
+                else if(id>=300 && id<=321){
+                    wIcons.src =`http://openweathermap.org/img/wn/09d@2x.png`;
+                }
+
+                else if(id>=500 && id<=531){
+                    wIcons.src =`http://openweathermap.org/img/wn/10d@2x.png`;
+                }
+
+                else if(id>=600 && id<=622){
+                    wIcons.src =`http://openweathermap.org/img/wn/13d@2x.png`;
+                }
+
+                else if(id>=700 && id<=781){
+                    wIcons.src =`http://openweathermap.org/img/wn/50d@2x.png`;
+                }
+                
+                else if(id>=800 && id<=804){
+                    wIcons.src =`http://openweathermap.org/img/wn/03d@2x.png`;
+                }
+
                 temperatureDegree.textContent = temp;
-                console.log(data.weather[0].main);
+                temperatureDescription.textContent=`Its ${description} today`;
+                locationTimezone.textContent=`${name}, ${data.sys.country}`;
+                console.log(locationTimezone);
             });
         });
 
         
     } 
-        else{
-        alert("Please allow your location.");
+
+    function setIcons(icons, iconID){
+        const skycons = skycons({color:"white"})
     }
+        
 });

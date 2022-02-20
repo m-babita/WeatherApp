@@ -5,7 +5,7 @@ let long, lat, api,
     degreeSection = document.querySelector(".degree__section")
     degreeSpan = document.querySelector(".degree__section span"),
     wIcons = document.querySelector(".icons");
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
+    
 
 window.addEventListener('load', ()=>{
     
@@ -14,21 +14,15 @@ window.addEventListener('load', ()=>{
         navigator.geolocation.getCurrentPosition(  position =>{
             long = position.coords.longitude;
             lat = position.coords.latitude;
-            api = `${proxy}https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=5349b1599db6dd3cb3add5621bc5f939`;
-            
-            
-
+            api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=5349b1599db6dd3cb3add5621bc5f939`;
+    
             fetchApi(api);
-            
-
         });
     } 
         
 });
 
 async function fetchApi(api){
-
-    
 
     const response = await fetch(api);
     const data = await response.json();
